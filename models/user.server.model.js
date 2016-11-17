@@ -1,18 +1,32 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var Skill = require('./skill.server.model')
+'use strict'
 
+const mongoose = require('mongoose');
 
-var userSchema = new Schema({
-  name : {
-    type : String,
-    required : true
-  },
-  skills : [{
-    type : Schema.ObjectId,
-    ref  : 'Skill'
-  }]
+let skillSchema = mongoose.Schema({
+
+    skill: {
+      type:String,
+      required:true
+
+    },
+    value   : Number
+
 });
 
 
-module.exports = mongoose.Model('User', userSchema)
+let Schema = mongoose.Schema
+
+let userSchema = new Schema({
+
+  user: String,
+  skill:[skillSchema]
+
+},{
+
+  timestamps:true
+
+})
+
+let Users = mongoose.model('Users', userSchema)
+
+module.exports = Users
